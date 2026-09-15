@@ -1,0 +1,11 @@
+{
+  "_comment": "Paste into claude_desktop_config.json (Claude Desktop → Settings → Developer → Edit Config). Replace rvk_YOUR_KEY with your key from https://app.revnuvo.site. Then ask: 'What changed at stripe.com?'",
+  "mcpServers": {
+    "revnuvo": {
+      "url": "https://mcp.revnuvo.site/mcp",
+      "headers": {
+        "Authorization": "Bearer rvk_YOUR_KEY"
+      }
+    }
+  }
+}

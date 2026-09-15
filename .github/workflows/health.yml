@@ -1,0 +1,36 @@
+# Automated ecosystem health tests (directive §26): a broken integration is a
+# broken distribution channel. Runs against PRODUCTION on every push + daily.
+name: ecosystem-health
+on:
+  push:
+  schedule: [{ cron: "0 9 * * *" }]
+  workflow_dispatch:
+jobs:
+  surfaces:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: docs + discovery surfaces resolve
+        run: |
+          set -e
+          for u in "https://intel.revnuvo.site/" "https://intel.revnuvo.site/docs/api" \
+                   "https://intel.revnuvo.site/docs/mcp" "https://intel.revnuvo.site/docs/claude" \
+                   "https://intel.revnuvo.site/llms.txt" "https://intel.revnuvo.site/health" \
+                   "https://app.revnuvo.site/" "https://revnuvo.site/llms.txt"; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 "$u")
+            echo "$code $u"; [ "$code" = "200" ] || { echo "BROKEN SURFACE: $u"; exit 1; }
+          done
+      - name: x402 path returns 402 spec
+        run: |
+          code=$(curl -s -o body -w "%{http_code}" -X POST "https://intel.revnuvo.site/v1/x402/company-state" \
+            -H "content-type: application/json" -d '{"domain":"example.com"}')
+          grep -q "payTo" body && [ "$code" = "402" ] || { echo "x402 spec broken"; exit 1; }
+      - name: MCP handshake (unauthenticated must be 401, not 500)
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST "https://mcp.revnuvo.site/mcp" \
+            -H "content-type: application/json" -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}')
+          [ "$code" = "401" ] || { echo "MCP auth gate broken (got $code)"; exit 1; }
+      - name: npm package installs
+        run: npm install revnuvo --no-save && node -e "import('revnuvo').then(m=>console.log('npm OK:', !!m.Revnuvo))"
+      - name: PyPI package installs
+        run: pip install revnuvo-intel && python3 -c "import revnuvo_intel; print('PyPI OK')"
