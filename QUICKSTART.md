@@ -9,8 +9,9 @@ Zero-to-first-real-query, no human contact required.
 
 ## 1. Get a free API key (30 seconds)
 
-1. Go to **https://app.revnuvo.site**
+1. Go to **https://app.revnuvo.site/?ref=github**
 2. Enter your email → click **Continue with email** → click the link in your inbox
+   *(If email delivery is temporarily degraded, the page shows your personal sign-in link directly — same single-use link, just not emailed. We show this honestly rather than leaving you waiting.)*
 3. Go to **Settings → API keys** → **Create key**
 4. Copy the key (`rvk_xxxxxxxx_yyyy...`) — it is shown **once**
 

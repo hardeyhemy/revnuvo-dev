@@ -12,14 +12,14 @@ This repository contains everything a developer needs to go from **zero to first
 | MCP server (remote) | `https://mcp.revnuvo.site/mcp` — [docs](https://intel.revnuvo.site/docs/mcp) |
 | JavaScript SDK | [`revnuvo` on npm](https://www.npmjs.com/package/revnuvo) |
 | Python SDK | [`revnuvo-intel` on PyPI](https://pypi.org/project/revnuvo-intel/) |
-| Free API key | [app.revnuvo.site](https://app.revnuvo.site) — 100 calls/month, no credit card |
+| Free API key | [app.revnuvo.site](https://app.revnuvo.site/?ref=github) — 100 calls/month, no credit card |
 | Machine payments | x402 per call, $0.01 USDC on Base — [docs](https://intel.revnuvo.site/docs/x402) |
 
 ## Quickstart
 
 ```bash
 # 1) get a free key (magic link, 30 seconds)
-open https://app.revnuvo.site
+open "https://app.revnuvo.site/?ref=github"
 
 # 2) first real query
 export REVNUVO_API_KEY=rvk_...
