@@ -10,6 +10,7 @@ This repository contains everything a developer needs to go from **zero to first
 |---|---|
 | REST API | `https://intel.revnuvo.site/v1` — [docs](https://intel.revnuvo.site/docs/api) |
 | MCP server (remote) | `https://mcp.revnuvo.site/mcp` — [docs](https://intel.revnuvo.site/docs/mcp) |
+| MCP server (stdio bridge) | [`mcp/server.mjs`](mcp/) — for stdio-only desktop clients; also runs via the included [Dockerfile](Dockerfile) |
 | JavaScript SDK | [`revnuvo` on npm](https://www.npmjs.com/package/revnuvo) |
 | Python SDK | [`revnuvo-intel` on PyPI](https://pypi.org/project/revnuvo-intel/) |
 | Free API key | [app.revnuvo.site](https://app.revnuvo.site/?ref=github) — 100 calls/month, no credit card |
